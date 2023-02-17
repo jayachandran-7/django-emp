@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container-fluid" style="margin-top: 50px;">
+    <div class="col-md-offset-3 col-md-6">
+        <h3 class="page-header text-primary text-center">Staff Details</h3>
+        
+        <style>
+            th{
+                text-align: center;
+            }
+            .center{
+                text-align: center;
+            }
+        </style>
+        <div class="col-md-6 pull-right">
+            <a class="btn btn-success btn-block" href="insert/">Insert</a><br>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            Min Age : <input type="number" name="minage"/><br>
+            Max Age : <input type="number" name="maxage"/>
+            <input type="submit" value="Search"/>
+        </form>    
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            {% for xdata in data %}
+            <tbody>
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{xdata.name}}</td>
+                    <td>{{xdata.age}}</td>
+                    <td>{{xdata.address}}</td>
+                    <td>{{xdata.contact}}</td>
+                    <td>{{xdata.email}}</td>
+                    <td class="center"><a class="btn btn-primary" href="update/{{xdata.id}}">Update</a></td>
+                    <td class="center"><a class="btn btn-primary" href="delete/{{xdata.id}}">Delete</a></td>
+                </tr>
+            </tbody>
+            {% endfor %}
+
+        </table>
+        
+
+    </div>
+</div>
+
+{% endblock %}
+
+
